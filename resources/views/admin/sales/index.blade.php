@@ -27,7 +27,9 @@
                                 <th class="py-2 px-3">Sucursal</th>
                                 <th class="py-2 px-3">Caja</th>
                                 <th class="py-2 px-3">Usuario</th>
+                                <th class="py-2 px-3">Cliente</th>
                                 <th class="py-2 px-3">Pago</th>
+                                <th class="py-2 px-3">Estatus</th>
                                 <th class="py-2 px-3 text-right">Total</th>
                                 <th class="py-2 pl-3 text-right">Fecha</th>
                             </tr>
@@ -50,7 +52,17 @@
                                         {{ $sale->user ? $sale->user->name : '—' }}
                                     </td>
                                     <td class="py-3 px-3 text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                                        {{ $sale->customer ? $sale->customer->name : '—' }}
+                                    </td>
+                                    <td class="py-3 px-3 text-gray-700 dark:text-gray-300 whitespace-nowrap">
                                         {{ ['cash' => 'Efectivo', 'card' => 'Tarjeta', 'mixed' => 'Mixto'][$sale->payment_method] ?? $sale->payment_method }}
+                                    </td>
+                                    <td class="py-3 px-3 whitespace-nowrap">
+                                        @if ($sale->status === \App\Models\Sale::STATUS_CANCELLED)
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-200">Cancelada</span>
+                                        @else
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">Completada</span>
+                                        @endif
                                     </td>
                                     <td class="py-3 px-3 text-right tabular-nums whitespace-nowrap text-gray-900 dark:text-white">
                                         ${{ number_format((float) $sale->total, 2) }}
@@ -61,7 +73,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="py-10 text-center text-gray-500 dark:text-gray-400">
+                                    <td colspan="9" class="py-10 text-center text-gray-500 dark:text-gray-400">
                                         Sin ventas
                                     </td>
                                 </tr>

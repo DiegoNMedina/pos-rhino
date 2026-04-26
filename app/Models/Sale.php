@@ -20,6 +20,7 @@ class Sale extends Model
         'branch_id',
         'register_id',
         'user_id',
+        'customer_id',
         'status',
         'payment_method',
         'subtotal',
@@ -28,6 +29,9 @@ class Sale extends Model
         'total',
         'cash_received',
         'change_due',
+        'cancelled_at',
+        'cancelled_by_user_id',
+        'cancel_reason',
     ];
 
     protected function casts(): array
@@ -39,6 +43,7 @@ class Sale extends Model
             'total' => 'decimal:2',
             'cash_received' => 'decimal:2',
             'change_due' => 'decimal:2',
+            'cancelled_at' => 'datetime',
         ];
     }
 
@@ -50,6 +55,11 @@ class Sale extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
     }
 
     public function store(): BelongsTo

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\SaleController as AdminSaleController;
@@ -163,9 +164,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'can:manage-pos', 'subscribed'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     Route::resource('products', AdminProductController::class)->except(['show']);
+    Route::resource('customers', AdminCustomerController::class)->except(['show']);
     Route::resource('users', AdminUserController::class)->except(['show', 'destroy']);
     Route::get('sales', [AdminSaleController::class, 'index'])->name('sales.index');
     Route::get('sales/{sale}', [AdminSaleController::class, 'show'])->name('sales.show');
+    Route::post('sales/{sale}/cancel', [AdminSaleController::class, 'cancel'])->name('sales.cancel');
     Route::get('reports', [AdminReportController::class, 'index'])->name('reports.index');
     Route::get('settings', [AdminSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [AdminSettingsController::class, 'update'])->name('settings.update');

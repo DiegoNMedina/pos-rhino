@@ -4,6 +4,7 @@ namespace App\Services\Pos;
 
 use App\Enums\PaymentMethod;
 use App\Models\Branch;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Register;
 use App\Models\Sale;
@@ -26,6 +27,7 @@ class PosService
     {
         $paymentMethod = (string) Arr::get($payload, 'payment_method');
         $cashReceived = Arr::get($payload, 'cash_received');
+        $customerId = Arr::get($payload, 'customer_id');
 
         if (! in_array($paymentMethod, [PaymentMethod::CASH, PaymentMethod::CARD, PaymentMethod::MIXED], true)) {
             throw ValidationException::withMessages(['payment_method' => ['Método de pago inválido.']]);
@@ -36,7 +38,7 @@ class PosService
             throw ValidationException::withMessages(['items' => ['Agrega al menos un producto.']]);
         }
 
-        return DB::transaction(function () use ($storeId, $branchId, $registerId, $userId, $items, $paymentMethod, $cashReceived) {
+        return DB::transaction(function () use ($storeId, $branchId, $registerId, $userId, $items, $paymentMethod, $cashReceived, $customerId) {
             $branch = Branch::query()
                 ->whereKey($branchId)
                 ->when($storeId !== null, function ($builder) use ($storeId) {
@@ -60,11 +62,28 @@ class PosService
                 throw ValidationException::withMessages(['register_id' => ['Caja inválida.']]);
             }
 
+            $resolvedCustomerId = null;
+            if ($customerId !== null && (int) $customerId > 0) {
+                $customer = Customer::query()
+                    ->whereKey((int) $customerId)
+                    ->when($storeId !== null, function ($builder) use ($storeId) {
+                        $builder->where('store_id', $storeId);
+                    })
+                    ->first();
+
+                if (! $customer) {
+                    throw ValidationException::withMessages(['customer_id' => ['Cliente inválido.']]);
+                }
+
+                $resolvedCustomerId = $customer->id;
+            }
+
             $sale = new Sale;
             $sale->store_id = $storeId;
             $sale->branch_id = $branchId;
             $sale->register_id = $registerId;
             $sale->user_id = $userId;
+            $sale->customer_id = $resolvedCustomerId;
             $sale->payment_method = $paymentMethod;
             $sale->status = Sale::STATUS_COMPLETED;
             $sale->subtotal = 0;

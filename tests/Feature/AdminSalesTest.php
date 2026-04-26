@@ -65,4 +65,70 @@ class AdminSalesTest extends TestCase
             ->assertOk()
             ->assertSee('Venta #'.$sale->id);
     }
+
+    public function test_admin_can_cancel_sale_and_restore_inventory(): void
+    {
+        $this->seed();
+
+        $admin = User::query()->where('email', 'admin@pos.test')->firstOrFail();
+        $store = Store::query()->whereKey($admin->store_id)->firstOrFail();
+        $branch = Branch::query()->firstOrFail();
+        $register = Register::query()->firstOrFail();
+
+        $product = Product::query()->create([
+            'name' => 'Producto stock',
+            'code' => 'STOCK-001',
+            'barcode' => null,
+            'unit_type' => 'unit',
+            'price' => 10,
+            'stock' => 8,
+            'is_active' => true,
+            'store_id' => $store->id,
+        ]);
+
+        $sale = Sale::query()->create([
+            'store_id' => $store->id,
+            'branch_id' => $branch->id,
+            'register_id' => $register->id,
+            'user_id' => $admin->id,
+            'status' => Sale::STATUS_COMPLETED,
+            'payment_method' => 'cash',
+            'subtotal' => 20,
+            'discount_total' => 0,
+            'tax_total' => 0,
+            'total' => 20,
+            'cash_received' => 20,
+            'change_due' => 0,
+        ]);
+
+        SaleItem::query()->create([
+            'sale_id' => $sale->id,
+            'product_id' => $product->id,
+            'name' => $product->name,
+            'unit_type' => 'unit',
+            'quantity' => 2,
+            'unit_price' => 10,
+            'total' => 20,
+        ]);
+
+        $this->actingAs($admin)
+            ->post(route('admin.sales.cancel', $sale), [
+                'reason' => 'Error de cobro',
+            ])
+            ->assertRedirect();
+
+        $sale->refresh();
+
+        $this->assertSame(Sale::STATUS_CANCELLED, (string) $sale->status);
+        $this->assertNotNull($sale->cancelled_at);
+        $this->assertSame('Error de cobro', (string) $sale->cancel_reason);
+        $this->assertSame(10.0, (float) $product->fresh()->stock);
+
+        $this->assertDatabaseHas('audit_logs', [
+            'action' => 'sale.cancelled',
+            'subject_type' => 'sale',
+            'subject_id' => $sale->id,
+            'user_id' => $admin->id,
+        ]);
+    }
 }

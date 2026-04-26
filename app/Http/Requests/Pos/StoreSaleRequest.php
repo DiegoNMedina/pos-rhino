@@ -25,6 +25,7 @@ class StoreSaleRequest extends FormRequest
         return [
             'branch_id' => ['required', 'integer', 'exists:branches,id'],
             'register_id' => ['required', 'integer', 'exists:registers,id'],
+            'customer_id' => ['nullable', 'integer', 'exists:customers,id'],
             'payment_method' => ['required', 'string', 'in:cash,card,mixed'],
             'cash_received' => ['nullable', 'numeric', 'min:0'],
             'items' => ['required', 'array', 'min:1'],

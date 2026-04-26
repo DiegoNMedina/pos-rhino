@@ -58,6 +58,9 @@
                                     <x-dropdown-link :href="route('admin.products.index')">
                                         Productos
                                     </x-dropdown-link>
+                                    <x-dropdown-link :href="route('admin.customers.index')">
+                                        Clientes
+                                    </x-dropdown-link>
                                     <x-dropdown-link :href="route('admin.sales.index')">
                                         Ventas
                                     </x-dropdown-link>
@@ -178,6 +181,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
                     Productos
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.customers.index')" :active="request()->routeIs('admin.customers.*')">
+                    Clientes
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.sales.index')" :active="request()->routeIs('admin.sales.*')">
                     Ventas
