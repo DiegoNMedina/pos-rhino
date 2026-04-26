@@ -1,0 +1,244 @@
+Eres un Senior Software Engineer especializado en Laravel, arquitectura SaaS, sistemas POS (Point of Sale) y hardware integration.
+
+Necesito que construyas un sistema POS profesional, escalable y listo para vender como producto comercial (SaaS o licencias), con una arquitectura limpia, modular y mantenible.
+
+## 🧱 STACK PRINCIPAL
+
+* Backend: Laravel (última versión estable)
+* Frontend: Blade (sin frameworks pesados, pero con JS modular)
+* Base de datos: MySQL
+* Estilos: TailwindCSS o Bootstrap (moderno, limpio)
+* Arquitectura: Services + Repositories + Helpers
+* API REST interna para futuras integraciones
+
+---
+
+## 🎯 OBJETIVO
+
+Crear un sistema POS completo para tiendas físicas (abarrotes, comida, carnicerías, etc.) que incluya integración con básculas Rhino (peso automático), impresión de tickets, control de inventario y funcionalidades avanzadas que lo diferencien de otros sistemas POS del mercado.
+
+---
+
+## ⚙️ MÓDULOS PRINCIPALES
+
+### 🛒 1. Punto de Venta (POS)
+
+* Interfaz rápida y optimizada para teclado
+* Búsqueda de productos por:
+
+  * código
+  * nombre
+  * código de barras
+* Soporte para productos:
+
+  * por pieza
+  * por peso (integrados con báscula)
+* Cálculo automático:
+  precio_total = peso × precio_por_kg
+* Carrito dinámico en tiempo real
+* Métodos de pago:
+
+  * efectivo
+  * tarjeta
+  * mixto
+* Cálculo de cambio automático
+
+---
+
+### ⚖️ 2. Integración con Báscula Rhino
+
+Soporte para básculas con salida RS232 / USB (modo COM)
+
+#### Requisitos:
+
+* Crear un servicio llamado ScaleService
+* Leer datos desde puerto serial (ej: COM3)
+* Configuración:
+
+  * baudrate: 9600
+  * lectura continua
+* Parsear el peso recibido (ej: "1.250 kg")
+* Integrar con el POS para:
+
+  * autocompletar peso al agregar producto
+  * actualización en tiempo real
+
+Debe ser configurable:
+
+* seleccionar puerto
+* activar/desactivar báscula
+
+---
+
+### 🧾 3. Impresión de Tickets
+
+Compatible con impresoras térmicas (ESC/POS)
+
+#### Requisitos:
+
+* Crear TicketService
+* Generar ticket con:
+
+  * nombre del negocio
+  * dirección
+  * fecha y hora
+  * lista de productos
+  * total
+  * método de pago
+* Soporte para:
+
+  * impresora local (USB)
+  * red (IP)
+* Usar librerías compatibles con ESC/POS
+
+---
+
+### 📦 4. Inventario
+
+* CRUD de productos
+* Campos:
+
+  * nombre
+  * precio
+  * tipo (pieza / peso)
+  * stock
+  * código de barras
+* Control automático de inventario al vender
+* Alertas de bajo stock
+
+---
+
+### 👥 5. Usuarios y Roles
+
+* Admin
+* Cajero
+* Supervisor
+
+Permisos:
+
+* ventas
+* reportes
+* configuración
+
+---
+
+### 📊 6. Reportes
+
+* Ventas por día
+* Ventas por producto
+* Ventas por usuario
+* Ganancias
+* Exportar a Excel / PDF
+
+---
+
+## 🚀 FEATURES DIFERENCIADORES (IMPORTANTE)
+
+Implementar funcionalidades que lo hagan destacar:
+
+### 🔥 1. Modo Offline (cache local)
+
+* Permitir ventas sin internet
+* Sincronización cuando vuelva conexión
+
+### 🔗 2. API para integraciones
+
+* endpoints para:
+
+  * productos
+  * ventas
+  * inventario
+
+### 📱 3. Panel responsive
+
+* usable en tablet (tipo caja)
+
+### 🧠 4. Autocompletado inteligente
+
+* sugerencias de productos frecuentes
+
+### 💳 5. Historial de clientes
+
+* compras anteriores
+
+### 🏷️ 6. Soporte para promociones
+
+* descuentos por producto
+* combos
+
+### 🔔 7. Notificaciones
+
+* stock bajo
+* ventas del día
+
+---
+
+## ⚙️ CONFIGURACIÓN
+
+Crear módulo de configuración para:
+
+* puerto de báscula
+* impresora
+* datos del negocio
+* impuestos
+
+---
+
+## 🧪 PRUEBAS
+
+* Tests básicos de:
+
+  * ventas
+  * cálculo de peso
+  * inventario
+
+---
+
+## 🧠 BUENAS PRÁCTICAS
+
+* Código limpio (SOLID)
+* Uso de Services para lógica
+* Validaciones robustas
+* Logs de errores
+* Preparado para escalar a múltiples sucursales
+
+---
+
+## 🎨 UX/UI
+
+* Interfaz moderna tipo POS
+* Botones grandes (touch friendly)
+* Flujo rápido de venta (máximo 3 clics)
+
+---
+
+## 📦 ENTREGA
+
+Generar:
+
+* migraciones
+* seeders
+* estructura de proyecto
+* ejemplos de uso
+* documentación básica
+
+---
+
+## EXTRA (SI ES POSIBLE)
+
+* integración con lectores de código de barras
+* soporte multi-sucursal
+* soporte multi-caja
+* dashboard en tiempo real
+
+---
+
+Construye el sistema paso a paso, comenzando por:
+
+1. estructura base del proyecto
+2. módulo POS
+3. integración con báscula
+4. impresión de tickets
+5. módulos restantes
+
+Asegúrate de que el código sea claro, comentado y listo para producción.

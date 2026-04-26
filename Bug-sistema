@@ -1,0 +1,125 @@
+# ParseError - Internal Server Error
+
+Unclosed '[' on line 52 does not match ')'
+
+PHP 8.2.18
+Laravel 12.57.0
+580c-2806-262-48f-96d7-b11a-2f17-bf05-7a41.ngrok-free.app
+
+## Stack Trace
+
+0 - resources/views/support/admin/show.blade.php:42
+1 - vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:124
+2 - vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:57
+3 - vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:76
+4 - vendor/laravel/framework/src/Illuminate/View/View.php:208
+5 - vendor/laravel/framework/src/Illuminate/View/View.php:191
+6 - vendor/laravel/framework/src/Illuminate/View/View.php:160
+7 - vendor/laravel/framework/src/Illuminate/Http/Response.php:78
+8 - vendor/laravel/framework/src/Illuminate/Http/Response.php:34
+9 - vendor/laravel/framework/src/Illuminate/Routing/Router.php:939
+10 - vendor/laravel/framework/src/Illuminate/Routing/Router.php:906
+11 - vendor/laravel/framework/src/Illuminate/Routing/Router.php:821
+12 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+13 - vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authorize.php:59
+14 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+15 - vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php:50
+16 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+17 - vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php:63
+18 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+19 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php:87
+20 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+21 - vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php:48
+22 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+23 - vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php:120
+24 - vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php:63
+25 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+26 - vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php:36
+27 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+28 - vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php:74
+29 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+30 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:137
+31 - vendor/laravel/framework/src/Illuminate/Routing/Router.php:821
+32 - vendor/laravel/framework/src/Illuminate/Routing/Router.php:800
+33 - vendor/laravel/framework/src/Illuminate/Routing/Router.php:764
+34 - vendor/laravel/framework/src/Illuminate/Routing/Router.php:753
+35 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:200
+36 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+37 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php:21
+38 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php:31
+39 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+40 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php:21
+41 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php:51
+42 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+43 - vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php:27
+44 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+45 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php:109
+46 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+47 - vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php:61
+48 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+49 - vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php:58
+50 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+51 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php:22
+52 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+53 - vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php:26
+54 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:219
+55 - vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:137
+56 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:175
+57 - vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php:144
+58 - vendor/laravel/framework/src/Illuminate/Foundation/Application.php:1220
+59 - public/index.php:20
+60 - vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php:23
+
+## Request
+
+GET /soporte/admin/1
+
+## Headers
+
+* **host**: 580c-2806-262-48f-96d7-b11a-2f17-bf05-7a41.ngrok-free.app
+* **user-agent**: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+* **accept**: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+* **accept-encoding**: gzip, deflate, br, zstd
+* **accept-language**: es-US,es-419;q=0.9,es;q=0.8
+* **cookie**: abuse_interstitial=580c-2806-262-48f-96d7-b11a-2f17-bf05-7a41.ngrok-free.app; XSRF-TOKEN=eyJpdiI6Ijh5a2hWQWp6amFvYVMwMDE0YnVld1E9PSIsInZhbHVlIjoiM2lpY0p1VWR0SjVWOUZvV1k0VnZmS1EvT05RdUJYeXZhOHNxazdVaDBTeTJRaWJlSHBwdGpQNlpkWTBFVzhJSDQwTVJOdlU4U2xmeUVYZ0ZYTjdZMnNmUmZpWUYrcE5tQXdDTDdFQi9aeUVJNGcwNXRRVzhTRGJxZlllWFZPYVciLCJtYWMiOiJmMzg3MzQ4OWE1MGQ5NzM5Y2EzOTcxMWE4OTJlYTBkYmVlNzUzOGI1MWE3ZTliNWUxMzZjNWMzODA4OWU3NWVkIiwidGFnIjoiIn0%3D; cajalink-session=eyJpdiI6ImF1dFM4YkhKWXNvMlV6d2tLNGlqdUE9PSIsInZhbHVlIjoiZHVTTTdkS0VTVkFUWitUbHFNMFdOSFZhSzlqQ0MzcGVWakJkU292R0JrMGFqYlFTeW9NdU8yb0VzWU1sWkdWd3R3VWk5bkhETW9QcHVXb2FoQTZyMWRNMjU0QnpLU3NhWmZpUDhJeXNacWY1c2FPL1FLN3BaZ0JCbWxESTduMmIiLCJtYWMiOiJiM2ZhNDYwMWZmMmRiYzZhYjc3ZmMxY2E3NmFmMThiOTA0NzY4OGE5NzNhMDRmMTRiMTBkOGYxOTU4NGNkYWM0IiwidGFnIjoiIn0%3D
+* **priority**: u=0, i
+* **sec-ch-ua**: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+* **sec-ch-ua-mobile**: ?0
+* **sec-ch-ua-platform**: "macOS"
+* **sec-fetch-dest**: document
+* **sec-fetch-mode**: navigate
+* **sec-fetch-site**: cross-site
+* **sec-fetch-user**: ?1
+* **upgrade-insecure-requests**: 1
+* **x-forwarded-for**: 2806:262:48f:96d7:3540:87e1:43e:6ba3
+* **x-forwarded-host**: 580c-2806-262-48f-96d7-b11a-2f17-bf05-7a41.ngrok-free.app
+* **x-forwarded-proto**: https
+
+## Route Context
+
+controller: App\Http\Controllers\Support\AdminController@show
+route name: support.admin.show
+middleware: web, auth, can:manage-support
+
+## Route Parameters
+
+{
+    "conversation": {
+        "id": 1,
+        "store_id": 2,
+        "status": "open",
+        "last_message_at": "2026-04-26T02:40:31.000000Z",
+        "created_at": "2026-04-26T02:40:31.000000Z",
+        "updated_at": "2026-04-26T02:40:31.000000Z"
+    }
+}
+
+## Database Queries
+
+* mysql - select * from `sessions` where `id` = 'oQ6KyGSKwpSNun7AcdQnWdvB2aw2vwkeNOdoqekz' limit 1 (1.38 ms)
+* mysql - select * from `users` where `id` = 1 limit 1 (0.43 ms)
+* mysql - select * from `support_conversations` where `id` = '1' limit 1 (0.37 ms)
+* mysql - select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'support_conversations' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists` (0.42 ms)
+* mysql - select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'support_messages' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists` (0.35 ms)
+* mysql - select * from `support_messages` where `conversation_id` = 1 order by `id` asc limit 50 (0.46 ms)
+* mysql - select * from `stores` where `stores`.`id` in (2) (0.36 ms)

@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        color-scheme: light;
+    }
+
+    html.dark {
+        color-scheme: dark;
+    }
+}
+
+@layer components {
+    .cl-bg {
+        background:
+            radial-gradient(700px circle at 15% 10%, rgba(99, 102, 241, 0.20), transparent 40%),
+            radial-gradient(600px circle at 85% 15%, rgba(20, 184, 166, 0.16), transparent 45%),
+            radial-gradient(700px circle at 55% 90%, rgba(245, 158, 11, 0.14), transparent 55%),
+            linear-gradient(to bottom, rgb(255 255 255), rgb(243 244 246));
+    }
+
+    html.dark .cl-bg {
+        background:
+            radial-gradient(700px circle at 15% 10%, rgba(99, 102, 241, 0.22), transparent 45%),
+            radial-gradient(600px circle at 85% 15%, rgba(20, 184, 166, 0.18), transparent 50%),
+            radial-gradient(700px circle at 55% 90%, rgba(245, 158, 11, 0.14), transparent 60%),
+            linear-gradient(to bottom, rgb(3 7 18), rgb(17 24 39));
+    }
+
+    .cl-grid {
+        background-image:
+            linear-gradient(to right, rgba(17, 24, 39, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(17, 24, 39, 0.08) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(circle at 50% 35%, black 0%, transparent 70%);
+    }
+
+    html.dark .cl-grid {
+        background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    }
+
+    .cl-surface {
+        @apply rounded-2xl border border-gray-200/70 bg-white/70 shadow-sm backdrop-blur-xl dark:border-gray-800/70 dark:bg-gray-900/60;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+    }
+
+    html.dark .cl-surface {
+        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35);
+    }
+
+    .cl-surface-hover {
+        @apply transition hover:bg-white/80 hover:shadow-md dark:hover:bg-gray-900/70;
+    }
+
+    .cl-muted {
+        @apply text-gray-500 dark:text-gray-400;
+    }
+
+    .cl-title {
+        @apply font-semibold tracking-tight text-gray-900 dark:text-white;
+    }
+
+    .cl-chip {
+        @apply inline-flex items-center gap-2 rounded-full border border-gray-200/70 bg-white/60 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur dark:border-gray-800/70 dark:bg-gray-950/20 dark:text-gray-200;
+    }
+}
