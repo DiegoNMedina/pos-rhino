@@ -6,8 +6,10 @@ use App\Models\Store;
 use App\Models\SubscriptionPayment;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
+use Stripe\Exception\SignatureVerificationException;
 use Stripe\StripeClient;
 use Stripe\Webhook;
+use UnexpectedValueException;
 
 class StripeWebhookController
 {
@@ -21,7 +23,11 @@ class StripeWebhookController
         $payload = (string) $request->getContent();
         $sigHeader = (string) $request->header('Stripe-Signature');
 
-        $event = Webhook::constructEvent($payload, $sigHeader, $secret);
+        try {
+            $event = Webhook::constructEvent($payload, $sigHeader, $secret);
+        } catch (SignatureVerificationException|UnexpectedValueException $exception) {
+            return response('Stripe webhook inválido.', 400);
+        }
 
         if ($event->type === 'checkout.session.completed') {
             $session = $event->data->object;
@@ -72,6 +78,13 @@ class StripeWebhookController
             $invoice = $event->data->object;
             $customerId = $invoice->customer ?? null;
             $subscriptionId = $invoice->subscription ?? null;
+
+            $customerId = is_string($customerId) && trim($customerId) !== '' ? $customerId : null;
+            $subscriptionId = is_string($subscriptionId) && trim($subscriptionId) !== '' ? $subscriptionId : null;
+
+            if ($customerId === null && $subscriptionId === null) {
+                return response()->json(['received' => true]);
+            }
 
             $store = Store::query()
                 ->when($customerId !== null, fn ($q) => $q->where('stripe_customer_id', $customerId))
